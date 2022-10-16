@@ -1,53 +1,53 @@
-import { faker } from '@faker-js/faker';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import Modal, { ModalProps } from '.';
+import { faker } from "@faker-js/faker";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import Modal, { ModalProps } from ".";
 
-describe('Component: Modal', () => {
-  const defaultProps: Omit<ModalProps, 'children'> = {
-    isOpen: false,
-    onCloseModal: () => {},
-  };
+describe("Component: Modal", () => {
+    const defaultProps: Omit<ModalProps, "children"> = {
+        isOpen: false,
+        onCloseModal: () => {},
+    };
 
-  it('should render the children component if the isOpen prop is true', () => {
-    const content = faker.lorem.words();
-    render(
-      <Modal {...defaultProps} isOpen>
-        <div>{content}</div>
-      </Modal>
-    );
+    it("should render the children component if the isOpen prop is true", () => {
+        const content = faker.lorem.words();
+        render(
+            <Modal {...defaultProps} isOpen>
+                <div>{content}</div>
+            </Modal>
+        );
 
-    const contentComponent = screen.getByText(content);
+        const contentComponent = screen.getByText(content);
 
-    expect(contentComponent).toBeInTheDocument();
-  });
+        expect(contentComponent).toBeInTheDocument();
+    });
 
-  it('should not render the children component if the isOpen prop is false', () => {
-    const content = faker.lorem.words();
-    render(
-      <Modal {...defaultProps} isOpen={false}>
-        <div>{content}</div>
-      </Modal>
-    );
+    it("should not render the children component if the isOpen prop is false", () => {
+        const content = faker.lorem.words();
+        render(
+            <Modal {...defaultProps} isOpen={false}>
+                <div>{content}</div>
+            </Modal>
+        );
 
-    const contentComponent = screen.queryByText(content);
+        const contentComponent = screen.queryByText(content);
 
-    expect(contentComponent).not.toBeInTheDocument();
-  });
+        expect(contentComponent).not.toBeInTheDocument();
+    });
 
-  it('should call the onCloseModal prop callback when thhe overlay is pressed', () => {
-    const handleCloseModal = jest.fn();
+    it("should call the onCloseModal prop callback when thhe overlay is pressed", () => {
+        const handleCloseModal = jest.fn();
 
-    render(
-      <Modal {...defaultProps} isOpen onCloseModal={handleCloseModal}>
-        <div>test-modal</div>
-      </Modal>
-    );
+        render(
+            <Modal {...defaultProps} isOpen onCloseModal={handleCloseModal}>
+                <div>test-modal</div>
+            </Modal>
+        );
 
-    const overlay = screen.getByRole('dialog');
+        const overlay = screen.getByRole("dialog");
 
-    userEvent.click(overlay);
+        userEvent.click(overlay);
 
-    expect(handleCloseModal).toHaveBeenCalledTimes(1);
-  });
+        expect(handleCloseModal).toHaveBeenCalledTimes(1);
+    });
 });
