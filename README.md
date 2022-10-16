@@ -91,6 +91,18 @@ E depois rode o comando para inicializar o projeto:
 yarn start
 ```
 
+Para rodar os testes podemos utilizar o comando:
+
+```
+yarn test
+```
+
+Para rodar os testes e gerar o relatório de coverage podemos utilizar o comando:
+
+```
+yarn test --coverage
+```
+
 ## :construction_worker: Créditos
 
 -   Arthur Almeida
